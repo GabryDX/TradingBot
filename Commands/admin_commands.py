@@ -160,7 +160,10 @@ async def aggiungi_titolo(messaggio):
 
 
 async def execute_server_command(messaggio):
-    command = messaggio.replace("/exec", "").strip()
-    res = os.popen(command)
-    res = res.read().strip()
-    return res
+    command = messaggio.text.replace("/exec", "").strip()
+    if command:
+        res = os.popen(command)
+        res = res.read().strip()
+    else:
+        res = "Nessun comando da eseguire"
+    await messaggio.reply_text(res)

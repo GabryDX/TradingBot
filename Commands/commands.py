@@ -31,7 +31,6 @@ async def echo(bot):
     updates = await bot.get_updates(offset=update_id, timeout=10)
     for update in updates:
         update_id = update.update_id + 1
-
         messaggio = update.message
 
         # controllo se nuovo utente e lo aggiungo nel database
@@ -96,14 +95,14 @@ async def echo(bot):
                         found = True
                         if statements[state][1] == "":
                             formula += statements[state][0]
-                            messaggio.reply_text(statements[state][2])
+                            await messaggio.reply_text(statements[state][2])
                         else:
                             formula += statements[state][0]
                             exec(statements[state][1])
-                            messaggio.reply_text(statements[state][2])  # messaggio di risposta
+                            await messaggio.reply_text(statements[state][2])  # messaggio di risposta
                 if not found:  # se non riconosce il messaggio
                     formula += "MESSAGGIO NON RICONOSCIUTO"
-                    messaggio.reply_text("Comando non riconosciuto")
+                    await messaggio.reply_text("Comando non riconosciuto")
 
             print(formula)
 
