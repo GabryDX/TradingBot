@@ -17,6 +17,7 @@ from telegram.error import NetworkError, Forbidden
 
 import admin
 import azioni
+import constants
 import utenti
 from Commands import commands
 from textfiles import exists_dir
@@ -49,7 +50,7 @@ async def main():
     global bot
     global update_id
     # Telegram Bot Authorization Token
-    bot = telegram.Bot('BOT-TOKEN')
+    bot = telegram.Bot(constants.BOT_TOKEN)
 
     print("\n --- AVVIO DEL BOT ---\n")
     admin.realod_admin()
