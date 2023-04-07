@@ -63,7 +63,7 @@ def get_cpu_use():
     cpu = 0.0
     for l in lista:
         riga = l.strip()
-        if not "CPU" in riga:
+        if "CPU" not in riga:
             cpu += float(riga)
     return str(round(cpu, 2))
 
