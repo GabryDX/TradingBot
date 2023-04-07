@@ -9,8 +9,10 @@ def get_all_info():
     str = ""
     server = get_raspberry_model()
     if server:
-        str += "Server: " + server + "\n"
-    str += "OS: " + get_os_info()
+        str += "Server: " + server
+    os_info = get_os_info()
+    if os_info:
+        str += "\nOS: " + os_info
     str += "\nCPU modello: " + get_cpu_model_name()
     cpu_temp = get_cpu_temperature()
     if cpu_temp:
@@ -24,7 +26,7 @@ def get_all_info():
     str += "\nSpazio totale: " + disk[0] + "B"
     str += "\nSpazio usato: " + disk[1] + "B (" + disk[3] + ")"
     str += "\nSpazio rimanente: " + disk[2] + "B"
-    return str
+    return str.strip()
 
 
 # Return CPU model name
@@ -82,7 +84,7 @@ def get_disk_space():
 
 
 def get_os_info():
-    res = os.popen('cat /etc/os-release | grep "NAME" | head -n 1 | cut -d"\""   -f2')
+    res = os.popen('cat /etc/os-release | grep "NAME" | head -n 1 | cut -d"\\"" -f2')
     res = res.read().strip()
     return res
 
